@@ -64,6 +64,7 @@ export const navigation = {
   pages: [
     { name: 'Company', href: '#' },
     { name: 'Stores', href: '#' },
+    { name: 'Dashboard', href: '/dashboard' },
     { name: 'Pricing', href: '/pricing' },
   ],
 };

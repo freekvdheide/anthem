@@ -1,5 +1,5 @@
 import { User } from '@supabase/supabase-js'
-import { Profile, OptimizedProfile } from './database'
+import { OptimizedProfile } from './database'
 
 // Auth form data types
 export interface SigninFormData {

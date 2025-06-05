@@ -84,7 +84,8 @@ export async function getRelatedProducts(): Promise<Product[]> {
       return []
     }
 
-    return data.map((item): Product => ({
+    const typedData = data as any[]
+    return typedData.map((item): Product => ({
       id: item.variant_id || 0,
       name: item.product_name || '',
       href: `#product-${item.product_id}`,
@@ -124,11 +125,10 @@ export async function getMainProduct(productId: number = 2): Promise<ProductData
 
     console.log(`Found ${productData.length} variants for product ${productId}`)
 
-    const product = productData[0]
-    
     // Get unique colors and sizes from variants
-    const uniqueColors = [...new Set(productData.map(p => p.color))]
-    const uniqueSizes = [...new Set(productData.map(p => p.size))]
+    const typedProductData = productData as any[]
+    const uniqueColors = [...new Set(typedProductData.map(p => p.color))]
+    const uniqueSizes = [...new Set(typedProductData.map(p => p.size))]
     
     console.log('Unique colors:', uniqueColors)
     console.log('Unique sizes:', uniqueSizes)
@@ -141,7 +141,7 @@ export async function getMainProduct(productId: number = 2): Promise<ProductData
 
     // Map sizes to UI format with stock check
     const sizes = uniqueSizes.map(size => {
-      const sizeVariants = productData.filter(p => p.size === size)
+      const sizeVariants = typedProductData.filter(p => p.size === size)
       const inStock = sizeVariants.some(v => (v.stock_quantity || 0) > 0)
       
       return {
@@ -151,10 +151,12 @@ export async function getMainProduct(productId: number = 2): Promise<ProductData
     })
 
     // Get product images from first few variants
-    const images = productData.slice(0, 4).map(p => ({
+    const images = typedProductData.slice(0, 4).map(p => ({
       src: p.image_url || '',
       alt: p.image_alt || ''
     }))
+
+    const product = productData[0] as any
 
     return {
       id: product.product_id || 0,
@@ -210,11 +212,13 @@ export async function getProductReviews(productId: number = 2): Promise<ReviewDa
       .eq('product_id', productId)
       .single()
 
-    const average = ratingData?.avg_rating || 0
-    const totalCount = ratingData?.review_count || 0
+    const typedRatingData = ratingData as any
+    const average = typedRatingData?.avg_rating || 0
+    const totalCount = typedRatingData?.review_count || 0
 
     // Format featured reviews
-    const featured = (reviewsData || []).map((review, index) => ({
+    const typedReviewsData = reviewsData as any[]
+    const featured = (typedReviewsData || []).map((review, index) => ({
       id: review.id,
       title: `Review from ${review.customers?.first_name || 'Customer'}`,
       rating: review.rating || 5,
@@ -255,7 +259,8 @@ export async function searchProducts(query: string): Promise<Product[]> {
       return []
     }
 
-    return data.map((item): Product => ({
+    const typedSearchData = data as any[]
+    return typedSearchData.map((item): Product => ({
       id: item.variant_id || 0,
       name: item.product_name || '',
       href: `#product-${item.product_id}`,
