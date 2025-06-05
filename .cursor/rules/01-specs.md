@@ -1,11 +1,7 @@
 
 # 🚀 Technische Specificatie: Anthem E-commerce Project
 
-<<<<<<< HEAD
-## 📋 1. PROJECT OVERZICHT Xl
-=======
-## 📋 1. PROJECT OVERZICHT ik werk aan deze lijn
->>>>>>> dev
+## 📋 1. PROJECT OVERZICHT
 
 ### Basisinformatie
 - **Naam**: Anthem  
