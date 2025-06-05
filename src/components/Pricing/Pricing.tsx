@@ -1,19 +1,27 @@
+'use client'
+
+import { useState } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import CheckoutButton from './CheckoutButton'
+import BillingToggle from './BillingToggle'
+import type { BillingCycle } from '@/types/subscription'
 
 const tiers = [
   {
     name: 'Basic',
-    id: 'tier-basic',
-    href: '#',
-    price: { monthly: '$19', annually: '$15' },
+    id: 'tier-basic' as const,
+    planType: 'basic' as const,
     description: 'Everything necessary to get started.',
     features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    price: {
+      monthly: 19,
+      annually: 15,
+    },
   },
   {
     name: 'Essential',
-    id: 'tier-essential',
-    href: '#',
-    price: { monthly: '$49', annually: '$39' },
+    id: 'tier-essential' as const,
+    planType: 'essential' as const,
     description: 'Everything in Basic, plus essential tools for growing your business.',
     features: [
       '25 products',
@@ -22,12 +30,15 @@ const tiers = [
       '24-hour support response time',
       'Marketing automations',
     ],
+    price: {
+      monthly: 49,
+      annually: 39,
+    },
   },
   {
     name: 'Growth',
-    id: 'tier-growth',
-    href: '#',
-    price: { monthly: '$99', annually: '$79' },
+    id: 'tier-growth' as const,
+    planType: 'growth' as const,
     description: 'Everything in Essential, plus collaboration tools and deeper insights.',
     features: [
       'Unlimited products',
@@ -37,10 +48,24 @@ const tiers = [
       'Marketing automations',
       'Custom reporting tools',
     ],
+    price: {
+      monthly: 99,
+      annually: 79,
+    },
   },
 ]
 
 export default function Pricing() {
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly')
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+    }).format(price)
+  }
+
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -54,6 +79,15 @@ export default function Pricing() {
           Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
           loyalty, and driving sales.
         </p>
+
+        {/* Billing Toggle */}
+        <div className="mt-16">
+          <BillingToggle 
+            billingCycle={billingCycle} 
+            onChange={setBillingCycle} 
+          />
+        </div>
+
         <div className="mt-20 flow-root">
           <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-3 lg:divide-x lg:divide-y-0 xl:-mx-4">
             {tiers.map((tier) => (
@@ -62,17 +96,27 @@ export default function Pricing() {
                   {tier.name}
                 </h3>
                 <p className="mt-6 flex items-baseline gap-x-1">
-                  <span className="text-5xl font-semibold tracking-tight text-gray-900">{tier.price.monthly}</span>
-                  <span className="text-sm/6 font-semibold text-gray-600">/month</span>
+                  <span className="text-5xl font-semibold tracking-tight text-gray-900">
+                    {formatPrice(tier.price[billingCycle])}
+                  </span>
+                  <span className="text-sm/6 font-semibold text-gray-600">
+                    /{billingCycle === 'monthly' ? 'maand' : 'jaar'}
+                  </span>
                 </p>
-                <p className="mt-3 text-sm/6 text-gray-500">{tier.price.annually} per month if paid annually</p>
-                <a
-                  href={tier.href}
-                  aria-describedby={tier.id}
-                  className="mt-10 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                {billingCycle === 'annually' && (
+                  <p className="mt-3 text-sm/6 text-gray-500">
+                    {formatPrice(tier.price.monthly)} per maand bij maandelijkse betaling
+                  </p>
+                )}
+                
+                <CheckoutButton
+                  planType={tier.planType}
+                  billingCycle={billingCycle}
+                  className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Buy plan
-                </a>
+                  Kies {tier.name} Plan
+                </CheckoutButton>
+                
                 <p className="mt-10 text-sm/6 font-semibold text-gray-900">{tier.description}</p>
                 <ul role="list" className="mt-6 space-y-3 text-sm/6 text-gray-600">
                   {tier.features.map((feature) => (
