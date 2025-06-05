@@ -20,6 +20,7 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserIcon, XMarkIcon }
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { currencies, navigation } from '@/data/data'
 import SearchModal from '@/components/Search/SearchModal'
+import AuthLinks from '@/components/Auth/AuthLinks'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -139,6 +140,8 @@ export default function Header() {
               </TabPanels>
             </TabGroup>
 
+            <AuthLinks variant="mobile" />
+
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
@@ -153,19 +156,6 @@ export default function Header() {
                   )}
                 </div>
               ))}
-            </div>
-
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                  Create an account
-                </a>
-              </div>
-              <div className="flow-root">
-                <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                  Sign in
-                </a>
-              </div>
             </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
@@ -222,15 +212,7 @@ export default function Header() {
                 Get free delivery on orders over $100
               </p>
 
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                  Create an account
-                </a>
-                <span aria-hidden="true" className="h-6 w-px bg-gray-600" />
-                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                  Sign in
-                </a>
-              </div>
+              <AuthLinks variant="desktop" />
             </div>
           </div>
 
