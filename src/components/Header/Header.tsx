@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment, useState } from 'react'
+import Link from 'next/link'
 import {
   Dialog,
   DialogBackdrop,
@@ -141,9 +142,15 @@ export default function Header() {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                    {page.name}
-                  </a>
+                  {page.href.startsWith('/') ? (
+                    <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                      {page.name}
+                    </Link>
+                  ) : (
+                    <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                      {page.name}
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
@@ -234,14 +241,14 @@ export default function Header() {
                 <div className="flex h-16 items-center justify-between">
                   {/* Logo (lg+) */}
                   <div className="hidden lg:flex lg:items-center">
-                    <a href="#">
+                    <Link href="/">
                       <span className="sr-only">Your Company</span>
                       <img
                         alt=""
                         src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                         className="h-8 w-auto"
                       />
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="hidden h-full lg:flex">
@@ -354,13 +361,23 @@ export default function Header() {
                         ))}
 
                         {navigation.pages.map((page) => (
-                          <a
-                            key={page.name}
-                            href={page.href}
-                            className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                          >
-                            {page.name}
-                          </a>
+                          page.href.startsWith('/') ? (
+                            <Link
+                              key={page.name}
+                              href={page.href}
+                              className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                            >
+                              {page.name}
+                            </Link>
+                          ) : (
+                            <a
+                              key={page.name}
+                              href={page.href}
+                              className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                            >
+                              {page.name}
+                            </a>
+                          )
                         ))}
                       </div>
                     </PopoverGroup>
@@ -388,14 +405,14 @@ export default function Header() {
                   </div>
 
                   {/* Logo (lg-) */}
-                  <a href="#" className="lg:hidden">
+                  <Link href="/" className="lg:hidden">
                     <span className="sr-only">Your Company</span>
                     <img
                       alt=""
                       src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                       className="h-8 w-auto"
                     />
-                  </a>
+                  </Link>
 
                   <div className="flex flex-1 items-center justify-end">
                     <div className="flex items-center lg:ml-8">

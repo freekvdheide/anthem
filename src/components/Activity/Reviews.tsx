@@ -68,14 +68,14 @@ export default function Reviews() {
         <h4 className="sr-only">Reviews</h4>
         <div className="space-y-10">
           {reviews.featured.map((review) => (
-            <div key={review.id} className="flex space-x-4">
+            <div key={review.id} className="flex space-x-4 p-6 rounded-lg hover:bg-indigo-50 transition-colors duration-200 -mx-6">
               <img
                 alt={review.author}
                 src={review.avatarSrc}
-                className="size-10 rounded-full"
+                className="size-10 rounded-full ring-2 ring-indigo-100"
               />
               <div className="min-w-0 flex-1">
-                <h4 className="text-sm font-bold text-gray-900">{review.title}</h4>
+                <h4 className="text-sm font-bold text-gray-900 group-hover:text-indigo-600">{review.title}</h4>
                 <div className="mt-1 flex items-center">
                   {[0, 1, 2, 3, 4].map((rating) => (
                     <StarIcon
@@ -83,7 +83,7 @@ export default function Reviews() {
                       aria-hidden="true"
                       className={classNames(
                         review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
-                        'size-5 shrink-0',
+                        'size-5 shrink-0 transition-colors duration-200',
                       )}
                     />
                   ))}
@@ -95,7 +95,7 @@ export default function Reviews() {
                   className="mt-4 space-y-6 text-sm italic text-gray-600"
                 />
                 <div className="mt-6 flex justify-between items-center">
-                  <p className="text-sm text-gray-900">
+                  <p className="text-sm font-medium text-indigo-600">
                     {review.author}
                   </p>
                 </div>

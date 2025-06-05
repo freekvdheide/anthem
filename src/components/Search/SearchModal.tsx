@@ -56,20 +56,20 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
           <div className="relative">
             <MagnifyingGlassIcon
               aria-hidden="true"
-              className="pointer-events-none absolute left-4 top-3.5 size-5 text-gray-400"
+              className="pointer-events-none absolute left-4 top-3.5 size-5 text-indigo-500"
             />
             <input
               type="text"
               placeholder="Zoek producten..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+              className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none sm:text-sm"
               autoFocus
             />
             <button
               type="button"
               onClick={handleClose}
-              className="absolute right-4 top-3.5 size-5 text-gray-400 hover:text-gray-500"
+              className="absolute right-4 top-3.5 size-5 text-gray-400 hover:text-indigo-600 transition-colors duration-200"
             >
               <XMarkIcon aria-hidden="true" className="size-5" />
             </button>
@@ -78,7 +78,7 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
           {loading && (
             <div className="p-8 text-center">
               <div className="inline-flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-900"></div>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-indigo-600"></div>
                 <span className="text-sm text-gray-500">Zoeken...</span>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="group relative cursor-pointer rounded-md p-3 hover:bg-gray-50"
+                    className="group relative cursor-pointer rounded-md p-3 hover:bg-indigo-50 transition-colors duration-200"
                   >
                     <div className="flex items-center space-x-4">
                       <img
@@ -99,13 +99,13 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
                         className="size-16 rounded-md object-cover"
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                        <p className="text-sm font-medium text-gray-900 group-hover:text-indigo-600 transition-colors duration-200 truncate">
                           {product.name}
                         </p>
                         <p className="text-sm text-gray-500 truncate">
                           {product.color}
                         </p>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-gray-900 group-hover:text-indigo-600 transition-colors duration-200">
                           {product.price}
                         </p>
                       </div>
@@ -118,7 +118,7 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
 
           {!loading && query !== '' && filteredProducts.length === 0 && (
             <div className="px-6 py-14 text-center sm:px-14">
-              <MagnifyingGlassIcon aria-hidden="true" className="mx-auto size-6 text-gray-400" />
+              <MagnifyingGlassIcon aria-hidden="true" className="mx-auto size-6 text-indigo-400" />
               <p className="mt-4 text-sm text-gray-900">
                 Geen producten gevonden voor &quot;{query}&quot;. Probeer een andere zoekterm.
               </p>
@@ -127,7 +127,7 @@ export default function SearchModal({ open, setOpen }: SearchModalProps) {
 
           {query === '' && (
             <div className="px-6 py-14 text-center sm:px-14">
-              <MagnifyingGlassIcon aria-hidden="true" className="mx-auto size-6 text-gray-400" />
+              <MagnifyingGlassIcon aria-hidden="true" className="mx-auto size-6 text-indigo-400" />
               <p className="mt-4 text-sm text-gray-900">
                 Begin met typen om producten te zoeken...
               </p>

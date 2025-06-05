@@ -14,7 +14,7 @@ export default function Footer() {
               <ul role="list" className="mt-6 space-y-6">
                 {footerNavigation.account.map((item) => (
                   <li key={item.name} className="text-sm">
-                    <a href={item.href} className="text-gray-500 hover:text-gray-600">
+                    <a href={item.href} className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
                       {item.name}
                     </a>
                   </li>
@@ -26,7 +26,7 @@ export default function Footer() {
               <ul role="list" className="mt-6 space-y-6">
                 {footerNavigation.service.map((item) => (
                   <li key={item.name} className="text-sm">
-                    <a href={item.href} className="text-gray-500 hover:text-gray-600">
+                    <a href={item.href} className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
                       {item.name}
                     </a>
                   </li>
@@ -40,7 +40,7 @@ export default function Footer() {
               <ul role="list" className="mt-6 space-y-6">
                 {footerNavigation.company.map((item) => (
                   <li key={item.name} className="text-sm">
-                    <a href={item.href} className="text-gray-500 hover:text-gray-600">
+                    <a href={item.href} className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
                       {item.name}
                     </a>
                   </li>
@@ -52,7 +52,7 @@ export default function Footer() {
               <ul role="list" className="mt-6 space-y-6">
                 {footerNavigation.connect.map((item) => (
                   <li key={item.name} className="text-sm">
-                    <a href={item.href} className="text-gray-500 hover:text-gray-600">
+                    <a href={item.href} className="text-gray-500 hover:text-indigo-600 transition-colors duration-200">
                       {item.name}
                     </a>
                   </li>
