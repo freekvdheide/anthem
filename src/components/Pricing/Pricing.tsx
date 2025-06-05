@@ -76,7 +76,7 @@ export default function Pricing() {
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-lg font-medium text-pretty text-gray-600 sm:text-center sm:text-xl/8">
-          Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
+          Choose an affordable plan that&apos;s packed with the best features for engaging your audience, creating customer
           loyalty, and driving sales.
         </p>
 

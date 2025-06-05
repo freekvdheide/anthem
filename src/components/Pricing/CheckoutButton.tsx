@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { getStripe } from '@/lib/stripe-client'
-import { trackCheckoutInitiated, trackCheckoutCompleted, trackCheckoutFailed } from '@/lib/analytics'
+import { trackCheckoutInitiated, trackCheckoutFailed } from '@/lib/analytics'
 import type { PlanType, BillingCycle, CheckoutSessionRequest, CheckoutSessionResponse } from '@/types/subscription'
 
 interface CheckoutButtonProps {

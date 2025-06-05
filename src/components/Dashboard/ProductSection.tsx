@@ -10,8 +10,8 @@ import { classNames } from '@/lib/utils'
 export default function ProductSection() {
   const [product, setProduct] = useState<ProductData | null>(null)
   const [reviews, setReviews] = useState<ReviewData | null>(null)
-  const [selectedColor, setSelectedColor] = useState<any>(null)
-  const [selectedSize, setSelectedSize] = useState<any>(null)
+  const [selectedColor, setSelectedColor] = useState<{ name: string; class: string; selectedClass: string } | null>(null)
+  const [selectedSize, setSelectedSize] = useState<{ name: string; inStock: boolean } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 

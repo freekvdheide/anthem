@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe, STRIPE_CONFIG, PRICING_PLANS } from '@/lib/stripe'
 import { validateData, checkoutSessionSchema } from '@/lib/validation'
 import { rateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limiter'
-import { trackCheckoutCompleted } from '@/lib/analytics'
 
 export async function POST(request: NextRequest) {
   try {
@@ -113,10 +112,10 @@ export async function POST(request: NextRequest) {
       // Log Stripe specific errors
       if ('type' in error) {
         console.error('🔵 Stripe error details:', {
-          type: (error as any).type,
-          code: (error as any).code,
-          statusCode: (error as any).statusCode,
-          raw: (error as any).raw
+          type: (error as { type?: string }).type,
+          code: (error as { code?: string }).code,
+          statusCode: (error as { statusCode?: number }).statusCode,
+          raw: (error as { raw?: unknown }).raw
         })
       }
     }

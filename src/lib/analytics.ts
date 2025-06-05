@@ -3,7 +3,7 @@
 
 export interface AnalyticsEvent {
   event: string
-  properties: Record<string, any>
+  properties: Record<string, string | number | boolean | null | undefined>
   timestamp: number
   userId?: string
   sessionId?: string
@@ -12,7 +12,7 @@ export interface AnalyticsEvent {
 // In-memory store voor demo purposes
 const analyticsStore: AnalyticsEvent[] = []
 
-export function track(event: string, properties: Record<string, any> = {}, userId?: string) {
+export function track(event: string, properties: Record<string, string | number | boolean | null | undefined> = {}, userId?: string) {
   const analyticsEvent: AnalyticsEvent = {
     event,
     properties,
@@ -127,13 +127,16 @@ export function getConversionMetrics() {
 }
 
 export function getPopularPlans() {
-  const planCounts = analyticsStore
+  const planCounts: Record<string, number> = {}
+  
+  analyticsStore
     .filter(e => e.event === PAYMENT_EVENTS.CHECKOUT_COMPLETED)
-    .reduce((acc, event) => {
+    .forEach(event => {
       const planType = event.properties.plan_type
-      acc[planType] = (acc[planType] || 0) + 1
-      return acc
-    }, {} as Record<string, number>)
+      if (typeof planType === 'string') {
+        planCounts[planType] = (planCounts[planType] || 0) + 1
+      }
+    })
   
   return Object.entries(planCounts)
     .sort(([,a], [,b]) => b - a)

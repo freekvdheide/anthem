@@ -1,5 +1,4 @@
 import { supabase } from './supabase'
-import type { ProductOverview, ProductReview } from './supabase'
 
 // Interface voor frontend compatibility met bestaande types
 export interface Product {
