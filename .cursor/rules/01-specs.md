@@ -1,7 +1,7 @@
 
 # 🚀 Technische Specificatie: Anthem E-commerce Project
 
-## 📋 1. PROJECT OVERZICHT
+## 📋 1. PROJECT OVERZICHT -
 
 ### Basisinformatie
 - **Naam**: Anthem  
